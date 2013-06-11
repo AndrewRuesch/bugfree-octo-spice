@@ -1,0 +1,100 @@
+README
+
+ABOUT
+
+	This is a program I wrote for a Data Structures and Algorithm Analysis class I took. We were studying basic graph
+	theory at the time, and how to solve problems using a state-space search. In this assignment, we had to use a tree
+	to model the states of an 8 puzzle, and search the tree to find the steps to solve the puzzle. The use enters the
+	state of the puzzle that needs to be solved, and the program tracks the steps back up to the root of the tree, which 
+	is the solved state. At some time I would like to implement the extra credit prompt, to generalize the program to
+	solve an NxN puzzle! Please check out P4.pdf for a detailed description of the assignment.
+
+FILES INCLUDED
+	- Solver.java -> program that solves the puzzle
+	- StateSpace.java -> represents the search space of puzzle states
+	- GameState.java -> represents an individual puzzle state
+	- TestBed.java -> for testing puzzle randomizer
+
+TO RUN
+	
+	Please compile and then run Solver.java. This should compile all the other necessary code.
+	
+TO RUN WITH EXAMPLE INITIAL STATE
+
+	Example initial state (form lecture slides): 3 1 2
+																4 0 5
+																6 7 8 
+	
+	To run Solver with the example initial state (as above), please make sure that line 4 of Solver.java
+	is uncommented, and lines 5, 8, 9, and 10 are commented out.
+	
+TO RUN WITH RANDOM INITIAL STATE
+
+	To run solver with random initial state (which is a goal state randomized with 20 moves), please open Solver.java
+	and mare sure that line 4 is commented out, and lines 5, 8, 9, and 10 are uncommented.
+	
+TO RUN WITH CUSTOM INITIAL STATE
+
+	To run Solver with a custom initial state, please change line 4
+	
+		GameState initialState = new GameState(new int[][]{{3,1,2},{4,0,5},{6,7,8}})
+	
+	to initialize initialState with your own 3x3 matrix. 
+	
+	Note:
+	
+	I did not include any code to make the program exit gracefully
+	if it is run from an initial state that is unsolveable.
+	
+TO USE DEPTH-FIRST SEARCH TO SOLVE
+
+	To use depth-first search to solve the puzzle, please make sure that line 14 of Solver.java is not commented out,
+	and that line 13 is commented out.
+	
+TO USE BREADTH-FIRST SEARCH TO SOLVE
+
+	Similarly, to use BFS to solve the puzzle, please open Solver.java and make sure that line 13 is not
+	commented out, but line 14 is commented out.
+	
+THE ALGORITHM
+
+	The algorithm that I implemented is basically this:
+	
+	1) add initial state to array
+	
+	2) build the tree:
+	
+		repeatedly, do the following:
+	
+		- look at the next node in the array
+			- build its successor states and add them to the array
+		- continue until the goal state is found
+	
+	3) search the tree and solve the puzzle:
+	
+		use BFS or DFS to find the goal state in the tree, then invoke printPathToRoot() to 
+		print the trail of states from the goal state back up the tree to the root.
+	
+NOTES ABOUT IMPLEMENTATION AND TESTING
+
+	If you would like to see the nodes that are uncountered during BFS or DFS, please uncomment 
+	lines 160 and 183 repectively in StateSpace.java.
+	
+	To test the puzzle randomizing method, I use TestBed.java, which is included.
+	
+	To make sure that the successor states were being constructed correctly, I included print statements (as in
+	lines 37, 38, 40, and 41 of StateSpace) in the methods for building successor states (moveBlankUp(), 
+	moveBlankDown(), etc). These have been commented out though so as to not clutter up the output. 
+	
+	I set the number of steps to randomize the initial state by (line 8 of Solver.java) to 20. I tried 
+	using more steps than that, but if I went to high I sometimes ran out of heap space when I ran the program.
+	With everything set as it is the program should run quickly every time.
+	
+
+
+
+
+
+
+
+
